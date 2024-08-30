@@ -11,3 +11,52 @@
 // Output: 4
 // Input: S[] = {1, 2, 3}, E[] = {3, 4, 5}, K = 2
 // Output: 3
+
+
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+int maxShops(vector<int>& S, vector<int>& E, int K) {
+    vector<pair<int, int>> shops;
+    for (int i = 0; i < S.size(); i++) {
+        shops.push_back({E[i], S[i]});
+    }
+  
+    sort(shops.begin(), shops.end());
+    
+    vector<int> persons(K, 0);
+    
+    int count = 0;
+    
+    for (auto& shop : shops) {
+        int start = shop.second;
+        int end = shop.first;
+        
+        for (int i = 0; i < K; i++) {
+            if (persons[i] <= start) {  
+                persons[i] = end;  
+                count++;
+                break;  
+            }
+        }
+    }
+    
+    return count;
+}
+
+int main() {
+    vector<int> S1 = {1, 8, 3, 2, 6};
+    vector<int> E1 = {5, 10, 6, 5, 9};
+    int K1 = 2;
+    cout << "Maximum number of shops visited: " << maxShops(S1, E1, K1) << endl;  // Output: 4
+
+    vector<int> S2 = {1, 2, 3};
+    vector<int> E2 = {3, 4, 5};
+    int K2 = 2;
+    cout << "Maximum number of shops visited: " << maxShops(S2, E2, K2) << endl;  // Output: 3
+
+    return 0;
+}
