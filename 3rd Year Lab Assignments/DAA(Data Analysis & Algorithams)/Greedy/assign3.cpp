@@ -35,7 +35,7 @@ int minimumTask(vector<int> task, int d)
 {
  
     int left = 1;
-    int right = INT_MAX;
+    int right = INT_MIN;
  
     for (int index = 0;
          index < task.size();
